@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moneymate</title>
+    <link rel="stylesheet" href="CSS/home.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="title">
+        <p>MoneyMate</p>
+      </div>
+      <div class="nav-bar">
+        <span id="home-btn">Home</span>
+        <span id="transaction-btm">View Transactions</span>
+        <span id="analytics-btn">Analytics</span>
+        <span id="logout-btn">Logout</span>
+      </div>
+    </div>
+    <div class="outer-container">
+      <div class="container">
+        <div class="welcome-message">
+          <p style="color: black">Hello,</p>
+        </div>
+        <div class="amount-container">
+          <div class="total-balance" style="text-align: center">
+            <p>Total Balance</p>
+            <p class="amount">₹1000</p>
+          </div>
+          <div class="income-expense">
+            <div
+              class="income"
+              style="color: rgb(127, 250, 225); text-align: center"
+            >
+              <p>Income</p>
+              <p class="amount income-amount">₹2000</p>
+            </div>
+            <div
+              class="expense"
+              style="color: rgb(249, 148, 148); text-align: center"
+            >
+              <p>Expense</p>
+              <p class="amount expense-amount">₹3000</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="add-transaction-container">
+          <div class="input-data">
+            <div>
+              <input type="text" placeholder="Enter the amount" / class="input-amount">
+            </div>
+            <div>
+              <select name="category" class="type" id="category" required>
+                <option value="" disabled selected>Select Category</option>
+                <optgroup label="Income:">
+                  <option value="Salary">Salary</option>
+                  <option value="Loan">Loan</option>
+                </optgroup>
+                <optgroup label="Expense:">
+                  <option value="Food">Food</option>
+                  <option value="Rent">Rent</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Dress">Dress</option>
+                  <option value="Personal">Personal</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="" style="justify-content: center">
+            <button id="add-transaction-btn">Add transaction</button>
+          </div>
+        </div>
+        <hr class="divider-line" />
+        <div class="no-transactions">No recent transactions available.</div>
+      </div>
+    </div>
+
+    <script>
+      const navButtons = document.querySelectorAll(".nav-bar span");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      navButtons.forEach((btn) => {
+        if (btn !== logoutBtn) {
+          btn.addEventListener("click", () => {
+            document
+              .querySelector(".nav-bar .active")
+              ?.classList.remove("active");
+            btn.classList.add("active");
+          });
+        }
+      });
+
+      logoutBtn.addEventListener("click", () => {
+        document.querySelector(".nav-bar .active")?.classList.remove("active");
+        // Optionally, redirect or perform logout logic here
+      });
+
+    function animateAmount(el, finalValue, duration = 1000) {
+    const currentValue = extractNumber(el.textContent);
+    if (finalValue === currentValue) return;
+
+    const steps = duration / 16;
+    const increment = (finalValue - currentValue) / steps;
+    let current = currentValue;
+
+    function update() {
+      current += increment;
+      if ((increment > 0 && current >= finalValue) || (increment < 0 && current <= finalValue)) {
+        el.textContent = `₹${finalValue.toLocaleString()}`;
+      } else {
+        el.textContent = `₹${Math.floor(current).toLocaleString()}`;
+        requestAnimationFrame(update);
+      }
+    }
+
+    update();
+  }
+
+  function extractNumber(text) {
+    return parseInt(text.replace(/[₹,]/g, '')) || 0;
+  }
+
+  function animateInitialAndOnChange() {
+    document.querySelectorAll(".amount").forEach(el => {
+      const originalValue = extractNumber(el.textContent);
+
+      // Animate on page load from ₹0
+      el.textContent = "₹0";
+      setTimeout(() => animateAmount(el, originalValue), 100);
+
+      // Watch for changes (from ₹0 to new value etc.)
+      const observer = new MutationObserver(() => {
+        const newVal = extractNumber(el.textContent);
+        if (newVal !== 0) {
+          animateAmount(el, newVal);
+        }
+      });
+
+      observer.observe(el, { childList: true, characterData: true, subtree: true });
+    });
+  }
+
+  window.addEventListener("load", animateInitialAndOnChange);
+
+  const addBtn = document.querySelector("#add-transaction-btn");
+  addBtn.addEventListener('click', ()=>{
+    console.log('clicking');
+    
+    let inputAmount = document.querySelector(".input-amount");
+    let income = document.querySelector(".income-amount");
+
+    // to animate amount dynamically
+    if(inputAmount.value=="") inputAmount.value = 0;
+
+    console.log(inputAmount.value);
+    
+    animateAmount(income, inputAmount.value);
+    inputAmount.value = "";
+    
+  });
+  
+</script>
+    </script>
+  </body>
+</html>

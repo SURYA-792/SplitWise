@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  height: 70px;
+  background-color: #7950f2; /* softer purple */
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title p {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.nav-bar {
+  display: flex;
+}
+
+.nav-bar span {
+  background-color: #ccbef7; /* improved pastel violet */
+  height: 40px;
+  padding: 5px 8px 5px 8px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-bar span:hover {
+  background-color: #886cdd; /* darker violet on hover */
+  color: white;
+  transform: translateY(2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.nav-bar span.active {
+  background-color: #b07df2; /* deeper violet for active */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  transform: translateY(4px);
+}
+.outer-container {
+  margin: 4%;
+  display: flex;
+  justify-content: center;
+  left: 50%;
+  right: 50%;
+}
+.container {
+  /* background-color: aquamarine; */
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 2%; */
+  border-radius: 12px;
+  color: white;
+}
+.welcome-message {
+  text-align: left;
+  width: 100%;
+  margin-left: 20%;
+  padding: 10px 0px 0px 10px;
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.amount-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  width: 80%;
+  height: 180px;
+  border-radius: 12px;
+  padding: 2%;
+  background-color: #212529;
+}
+.income-expense {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8%;
+}
+.add-transaction-container {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.input-data {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  /* gap: 20px; spacing between the input and select */
+  /* box-sizing: border-box; */
+}
+
+.input-data input,
+.input-data select {
+  width: 230px;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #343a40;
+  border-radius: 10px;
+  color: white;
+}
+
+#add-transaction-btn {
+  text-align: center;
+  width: 230px;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #343a40;
+  border-radius: 10px;
+  color: white;
+}
+.divider-line {
+  width: 80%; /* full width of .add-transaction-container */
+  border: none; /* remove default border */
+  border-top: 1px solid #c3c1c1; /* horizontal line color & thickness */
+  margin: 20px 0 0 0; /* spacing above the line */
+  box-sizing: border-box;
+}
+
+.no-transactions {
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  color: #787575;
+  font-size: 18px;
+  font-style: italic;
+  /* background-color: #2a2a2a; optional background for visibility */
+  border-radius: 8px;
+}
